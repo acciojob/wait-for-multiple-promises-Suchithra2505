@@ -44,4 +44,8 @@ Promise.all(promises)
     // Calculate and display the total time taken to resolve all promises
     const totalTime = results.reduce((total, result) => total + result.time, 0);
     output.innerHTML += `<tr><td>Total</td><td>${(totalTime / 1000).toFixed(3)}</td></tr>`;
+  })
+	.catch(error => {
+    // Display the error in the output
+    output.innerHTML += `<tr><td colspan="2" style="color: red;">Error: ${error.message}</td></tr>`;
   });
