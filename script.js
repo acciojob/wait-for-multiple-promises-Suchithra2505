@@ -1,4 +1,3 @@
-//your JS code here. If required.
 // Get the tbody element
 const output = document.getElementById("output");
 
@@ -17,6 +16,9 @@ function createPromise(index) {
   });
 }
 
+// Add a row with loading text
+output.innerHTML += `<tr id="loading"><td colspan="2">Loading...</td></tr>`;
+
 // Array to store the promises
 const promises = [];
 
@@ -25,14 +27,14 @@ for (let i = 1; i <= 3; i++) {
   promises.push(createPromise(i));
 }
 
-// Add a row with loading text
-output.innerHTML += `<tr><td colspan="2">Loading...</td></tr>`;
-
 // Use Promise.all to wait for all promises to resolve
 Promise.all(promises)
   .then(results => {
     // Remove the loading text
-    output.innerHTML = '';
+    const loadingRow = document.getElementById("loading");
+    if (loadingRow) {
+      loadingRow.remove();
+    }
 
     // Populate the table with the results
     results.forEach(result => {
